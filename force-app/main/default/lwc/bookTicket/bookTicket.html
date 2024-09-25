@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Book Ticket" icon-name="action:new_event">
+        <div class="slds-p-horizontal_medium">
+            <!-- Record Edit Form -->
+            <lightning-record-edit-form object-api-name="Transaction__c" onsubmit={refreshApex}>
+                
+                <!-- Patron Lookup -->
+                <lightning-input-field field-name="Patron_Name__c" label="Select Patron" name="patron"  onchange={handleFieldChange}></lightning-input-field>
+                
+                <!-- Movie Lookup -->
+                <lightning-input-field field-name="Current_Movie__c" label="Select Movie" name="movie" onchange={handleFieldChange}></lightning-input-field>
+                
+                <!-- Number of Tickets -->
+                <lightning-input label="Number of Tickets" name="tickets" type="number" onchange={handleFieldChange}></lightning-input>
+
+                <!-- Customer Email -->
+                <lightning-input label="Patron Email" name="email" type="email" onchange={handleFieldChange}></lightning-input>
+
+                <!-- Book Ticket Button -->
+                <lightning-button variant="brand" label="Book Ticket" onclick={bookTicketHandler} class="slds-m-top_medium"></lightning-button>
+                
+            </lightning-record-edit-form>
+        </div>
+    </lightning-card>
+</template>
+

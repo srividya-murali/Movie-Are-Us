@@ -1,0 +1,33 @@
+<template>
+    <lightning-card title="Combo Box Check">
+        <div>
+            <lightning-combobox 
+            name="theatre"
+            label="Select Theatre"
+            placeholder="Choose Theatre"
+            options={theatreOptions}
+            onchange={handleChange}>
+            </lightning-combobox>
+        </div>
+
+        <div>
+            <lightning-combobox 
+            name="movie"
+            label="Select Movies"
+            placeholder="Choose Movie"
+            options={movieOptions}
+            onchange={handleMovieChange}>
+            </lightning-combobox>
+        </div>
+
+        <div>
+            <lightning-combobox 
+            name="movieshow"
+            label="Select Movies Showing"
+            placeholder="Choose Show"
+            options={movieShowOptions}
+            onchange={handleMovieShowingChange}>
+            </lightning-combobox>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,146 @@
+<template>
+  
+    <lightning-card title="Book Tickets"  icon-name="custom:custom45">
+
+        <div class="step-container">
+            <!-- Progress Indicator -->
+            <lightning-layout>
+                <lightning-layout-item size="1">
+                </lightning-layout-item>
+                <lightning-layout-item size="11">
+                    <lightning-progress-indicator current-step={currentStepString} variant="base" type="path"
+                        class="progress-indicator">
+                        <lightning-progress-step label="Select Theatre" value="1"></lightning-progress-step>
+                        <lightning-progress-step label="Select Movie" value="2"></lightning-progress-step>
+                        <lightning-progress-step label="Select Showtime" value="3"></lightning-progress-step>
+                        <lightning-progress-step label="Confirmation" value="4"></lightning-progress-step>
+                    </lightning-progress-indicator>
+                </lightning-layout-item>
+            </lightning-layout>
+
+
+            <template if:true={currentStep}>
+                <!-- Step 1: Select Theatre -->
+
+                <template if:true={isStepOne}>
+                    <lightning-layout>
+                        <lightning-layout-item size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <div class="step-header">Step 1: Select Theatre</div>
+                            <br />
+                            <div class="step-content">
+
+                                <lightning-combobox name="theatre" label="Select Theatre" value={selectedTheatre}
+                                    options={theatreOptions} onchange={handleTheatreChange}>
+                                </lightning-combobox>
+                                
+                            </div>
+                            <div>
+                                <template lwc:if={TheatreName}>
+                                </template>
+                                 
+                                <lightning-button variant="neutral" label="Next" onclick={handleNextStep}></lightning-button>
+                              
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5">
+                            <br />
+                            <img src={theater} />
+                        </lightning-layout-item>
+                    </lightning-layout>
+
+                </template>
+
+
+
+
+                <!-- Step 2: Select Movie -->
+
+
+                <template if:true={isStepTwo}>
+                    <lightning-layout>
+                        <lightning-layout-item size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+                            <div class="step-header">Step 2: Select Movie</div>
+                            <br />
+                            <div class="step-content">
+                                <lightning-combobox name="movie" label="Select Movie" value={selectedMovie}
+                                    options={movieOptions} onchange={handleMovieChange}>
+                                </lightning-combobox>
+                                <lightning-button variant="neutral" label="Back" onclick={handlePreviousStep}>
+                                </lightning-button>
+                                <lightning-button variant="brand" label="Next" onclick={handleNextStep}>
+                                </lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5">
+                            <br />
+                            <img src={movie} />
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+
+
+
+                <!-- Step 3: Select Show Time and Customer Details -->
+
+                <template if:true={isStepThree}>
+                    <lightning-layout>
+                        <lightning-layout-item size="1">
+                        </lightning-layout-item>
+                        <lightning-layout-item size="6">
+
+                            <div class="step-header">Step 3: Select Showtime and Customer Details</div>
+                            <br />
+
+                            <div class="step-content">
+                                <div class="flex-container">
+                                    <lightning-combobox name="showtime" label="Select Showtime" value={selectedShowtime}
+                                        options={movieShowOptions} onchange={handleShowtimeChange}
+                                        class="combobox-half-width">
+                                    </lightning-combobox>
+                                    <lightning-input label="Number of Tickets" type="number" value={numberOfTickets}
+                                        onchange={handleTicketChange} class="combobox-half-width">
+                                    </lightning-input>
+                                </div>
+
+                                <!-- Customer Details -->
+                                <div class="flex-container">
+                                    <lightning-combobox name="customerName" label="Patron Name"
+                                        value={selectedCustomerName} options={patronOptions}
+                                        onchange={handleCustomerNameChange} class="combobox-half-width" required>
+                                    </lightning-combobox>
+                                    <lightning-input label="Email for Communication" type="email" value={customerEmail}
+                                        onchange={handleCustomerEmailChange} class="combobox-half-width" required>
+                                    </lightning-input>
+                                    <lightning-input label="Mobile Number" type="tel" value={customerMobile}
+                                        onchange={handleCustomerMobileChange} class="combobox-half-width"
+                                        pattern="[0-9]{10}" title="Please enter a 10-digit mobile number" required>
+                                    </lightning-input>
+                                </div>
+                                
+                                <lightning-button variant="neutral" label="Back" onclick={handlePreviousStep}>
+                                </lightning-button> 
+                                <lightning-button variant="brand" label="Confirm" onclick={handleConfirm}>
+                                </lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="5">
+                            <br />
+                            <img src={showTime} />
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+
+
+                <!-- Confirmation Page -->
+                <template if:true={isConfirmation}>
+                    <div  >Your ticket booking has been confirmed!</div>
+                    <lightning-button variant="brand" label="Finish" onclick={handleFinish}></lightning-button>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>
